@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, json, useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const [credentials, setCredentials] = useState({ email: "", password: "" })
@@ -18,11 +18,12 @@ export default function Login() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Post request successful:', data);
             if (!data.success) {
                 alert("Enter Valid Credential");
             }
             if (data.success) {
+                localStorage.setItem("authToken", data.authToken);
+                console.log( localStorage.getItem("authToken") );
                 navigate("/");
             }
 
