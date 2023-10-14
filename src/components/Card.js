@@ -6,7 +6,7 @@ export default function Card(props) {
     return (
         <>
             <div className="card mt-3" style={{ "width": "18rem", "maxHeight": "360px" }}>
-                <img className="card-img-top" src={props.imgSrc} alt="Card image cap" style={{"height": "200px" }}/>
+                <img className="card-img-top" src={props.imgSrc} alt="Card cap" style={{"height": "150px", objectFit:"fill" }} />
                 <div className="card-body">
                     <h5 className="card-title">{props.foodName}</h5>
                     
@@ -26,7 +26,7 @@ export default function Card(props) {
                             }
                         </select>
                         <div className="d-inline h-100 fs-5">
-                            Total Price
+                            Total Price {localStorage.getItem("authToken")}
                         </div>
                     </div>
                 </div>
