@@ -59,31 +59,26 @@ export default function Home() {
                 {
                    foodCat !== [] ?
                    foodCat.map((data) => {
-                    return (
-                        <div className='row mb-3'>
-                            <div key={data._id} className='fs-3 m-3'> 
-                            {data.CategoryName} 
+                        return (
+                            <div className='row mb-3' key={data._id}>
+                                <div key={data._id} className='fs-3 m-3'> {data.CategoryName} </div>
+                                <hr />
+                                { 
+                                    foodItem !== [] ? 
+                                        foodItem.filter((item) => (item.CategoryName === data.CategoryName) && ( item.name.toLowerCase().includes( search.toLocaleLowerCase()) ) )
+                                        .map((filterItems) => {
+                                            return (
+                                                <div key={filterItems._id} className='col-12 col-md-6 col-lg-3'>
+                                                    <Card  foodItem = {filterItems}
+                                                    options = {filterItems.options[0]}
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                    : "No such Food"
+                                }
                             </div>
-                            <hr />
-                            { 
-                                foodItem !== [] ? 
-                                    foodItem.filter((item) => (item.CategoryName === data.CategoryName) && ( item.name.toLowerCase().includes( search.toLocaleLowerCase()) ) )
-                                    .map((filterItems) => {
-                                        return (
-                                            <div key={filterItems._id} className='col-12 col-md-6 col-lg-3'>
-                                                <Card 
-                                                foodName ={filterItems.name}
-                                                options = {filterItems.options[0]}
-                                                imgSrc = {filterItems.img}
-                                                desc = {filterItems.description}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                : "No such Food"
-                            }
-                        </div>
-                    )
+                        )
                    })
                    :"" 
                 }
